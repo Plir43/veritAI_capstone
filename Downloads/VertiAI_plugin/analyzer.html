@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>VeritAI - 분석 대시보드</title>
+    <style>
+        body { background-color: #0f172a; color: #f1f5f9; font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 24px; }
+        header { margin-bottom: 32px; text-align: center; }
+        h1 { font-size: 2rem; font-weight: bold; color: #60a5fa; margin: 0; }
+        #status-msg { color: #facc15; margin-top: 8px; font-weight: 500; font-size: 0.9rem; }
+        .dashboard { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .panel { background-color: #1e293b; padding: 32px; border-radius: 16px; border: 1px solid #334155; }
+        .canvas-container { display: flex; align-items: center; justify-content: center; min-height: 400px; background-color: #020617; border-radius: 12px; }
+        canvas { max-width: 100%; height: auto; border: 1px solid #475569; border-radius: 8px; display: none; }
+        .report-item { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #334155; }
+        .badge { padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: bold; background-color: #334155; }
+        #trust-score { font-size: 2.25rem; font-weight: 800; color: #60a5fa; }
+    </style>
+    <script src="drawing_utils.js"></script>
+    <script src="face_mesh.js"></script>
+</head>
+<body>
+    <header>
+        <h1>VeritAI 1차 전처리 대시보드</h1>
+        <p id="status-msg">엔진 로딩 중...</p>
+    </header>
+    <div class="dashboard">
+        <div class="panel canvas-container">
+            <canvas id="output_canvas"></canvas>
+            <div id="canvas-placeholder" style="color:#64748b">분석 시작 시 특징점이 표시됩니다.</div>
+        </div>
+        <div class="panel">
+            <h2 style="margin:0 0 24px 0; border-bottom: 2px solid #3b82f6; padding-bottom: 12px;">분석 리포트</h2>
+            
+            <div class="report-item">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-weight:600; color:#60a5fa;">📂 메타데이터(Exif)</span>
+                    <span id="badge-exif" class="badge">대기</span>
+                </div>
+                <p id="res-exif" style="font-size:0.875rem; color:#94a3b8; margin:0;">스캔 대기 중...</p>
+            </div>
+
+            <div class="report-item">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-weight:600; color:#60a5fa;">🔍 디지털 노이즈</span>
+                    <span id="badge-watermark" class="badge">대기</span>
+                </div>
+                <p id="res-watermark" style="font-size:0.875rem; color:#94a3b8; margin:0;">픽셀 패턴 분석 대기 중...</p>
+            </div>
+
+            <div class="report-item" style="border:none">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-weight:600; color:#60a5fa;">👤 안면 지오메트리</span>
+                    <span id="badge-geo" class="badge">대기</span>
+                </div>
+                <p id="res-geo" style="font-size:0.875rem; color:#94a3b8; margin:0;">특징점 추적 대기 중...</p>
+            </div>
+
+            <div style="text-align:center; padding:24px; background:rgba(30,58,138,0.2); border-radius:12px;">
+                <div style="font-size:0.875rem; color:#94a3b8; margin-bottom:8px;">최종 분석률</div>
+                <div id="trust-score">0%</div>
+            </div>
+        </div>
+    </div>
+    <script src="analyzer.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "VeritAI - 딥페이크 탐지기",
+  "version": "1.1",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content.js"]
+  }],
+"sandbox": {
+    "pages": ["analyzer.html"]
+  },
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:;"
+  },
+  "web_accessible_resources": [{
+    "resources": ["drawing_utils.js", "face_mesh.js", "*.wasm", "*.tflite"],
+    "matches": ["<all_urls>"]
+  }]
+}
