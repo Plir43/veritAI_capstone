@@ -1,6 +1,6 @@
 const overlayContainer = document.createElement('div');
 overlayContainer.id = 'verit-ai-container';
-overlayContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 0; height: 0; pointer-events: none; z-index: 2147483647;';
+overlayContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 0; height: 0; pointer-events: none; z-index: 999999;';
 document.body.appendChild(overlayContainer);
 
 function injectButtons() {
