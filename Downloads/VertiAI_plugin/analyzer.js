@@ -70,7 +70,7 @@ function analyzeExif(base64) {
         console.error("Exif Analysis Error:", e);
         document.getElementById('res-exif').innerText = "메타데이터 스캔 실패";
     }
-    updateProgress(25);
+    updateProgress(20);
 }
 
 // 2차 필터링: 노이즈 분석 및 변동성 히트맵 생성
@@ -146,7 +146,7 @@ function analyzeNoise(canvas) {
     } catch (e) {
         console.error("Noise Analysis Error:", e);
     }
-    updateProgress(35); // 비중 조절
+    updateProgress(30); 
 }
 
 // 3차 필터링: 안면 특징점 추출 및 시각화 콜백
@@ -171,7 +171,7 @@ function onResults(results) {
         badge.innerText = "성공"; 
         badge.style.background = "#22c55e";
         
-        updateProgress(40); 
+        updateProgress(50); 
         statusMsg.innerText = "1차 전처리 분석이 완료되었습니다.";
         statusMsg.style.color = "#60a5fa";
 
@@ -180,7 +180,7 @@ function onResults(results) {
         badge.innerText = "보류"; 
         badge.style.background = "#94a3b8"; 
         
-        updateProgress(40);
+        updateProgress(50);
         statusMsg.innerText = "안면 비포함 이미지 분석 완료";
         statusMsg.style.color = "#94a3b8";
     }
